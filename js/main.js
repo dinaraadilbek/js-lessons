@@ -1,10 +1,20 @@
-console.log(5 + + "-object");
-console.log(6 + + 4);
+ const numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", '');
 
-let number = 10,
-    b = 11;
+  const personalMovieDB = {
+      'count': numberOfFilms,
+      'movies': {},
+      'actors': {},
+      'genres': [],
+      'privat': false
+     };
 
-    ++number;
-    --b;
-    console.log(number);
-    console.log(b);
+
+let ques1 = prompt("Один из последних просмотренных фильмов?", ''),
+    ques = prompt("На сколько оцените его?", '');
+    ans1 = prompt("Один из последних просмотренных фильмов?", ''),
+    ans = prompt("На сколько оцените его?", '');
+
+    personalMovieDB.movies[ques1] = ques;
+    personalMovieDB.movies[ans1] = ans;
+
+console.log(personalMovieDB);
