@@ -1,68 +1,34 @@
-'use strict'
-//  let numberOfFilms;
+let cache = new WeakMap();
 
-//  function start() {
-//      numberOfFilms = +prompt("Сколько фильмов вы уже смотрели?", "");
-
-//      while(numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
-//          numberOfFilms = +prompt("Сколько фильмов вы уже смотрели?", "");
-//      }
-//  }
-//  start();
-
-let personalMovieDB = {
-    count: {},
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false
-};
-
-//  function rememberMyFilms() {
-//     for(let i = 0; i < 2; i++) {
-//         const a = prompt("Один из последних просмотренных фильмов?", ""),
-//               b = prompt("На сколько оцените его?", "");
-        
-//         if(a != null && b != null && a != '' && b != '' && a.length < 50) {
-//             personalMovieDB.movies[a] = b;
-//             console.log('done!');
-//         } else {
-//             console.log('Error');
-//             i--;
-//         }
-//     }
-// }
-// rememberMyFilms();
-
-//  function detectPersonalLevel() {
-//     if (personalMovieDB.count < 10) {
-//         console.log("Просмотрено довольно мало фильмов");
-//     } else if(personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-//         console.log("Вы классический зритель");
-//     } else if(personalMovieDB.count >= 30) {
-//         console.log("Вы киноман");
-//     } else {
-//         console.log("Произошла ошибка");
-//     }
-// }
-
-// detectPersonalLevel();
-
- function showMyDB(hidden) {
-     if(!hidden) {
-         console.log(personalMovieDB);
-     }
- };
- showMyDB(personalMovieDB.privat);
-
-
-function writeYourGenres() {
-   for( let i = 1; i <= 3; i++) {
-    const genre = prompt(`Ваш любимый жанр под номером ${i}`);
-    personalMovieDB.genres[i - 1] = genre;
-   }
+function cacheUser(user) {
+  if(!cache.has(user)) {
+    cache.set(user, Date.now());
+  }
+  return cache.get(user);
 }
-writeYourGenres();
+
+let lena = {name: 'Elena'};
+let ali = {name: 'Ali'};
+
+cacheUser(lena);
+cacheUser(ali);
+
+lena = null;
+console.log(cache.has(lena));
+console.log(cache.has(ali));
 
 
+let messages = [
+  {text: 'Hello', name: 'Ivan'},
+  {text: 'Earth', name: 'Dasha'},
+  {text: 'Already', name: 'Dina'}
+];
+
+let readMessages = new WeakSet();
+
+readMessages.add(messages[0]);
+// readMessages.add(messages[1]);
+
+messages.shift();
+console.log(readMessages.has(messages[0]));
 
